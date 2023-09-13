@@ -4,20 +4,31 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;500;700;900&display=swap"
+            rel="stylesheet">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="./assets/css/style.css">
     </head>
     <body>
         <div id="app">
             <div class="newTask">
-                <input v-model="newTask.text" type="text">
+                <input v-model="newTask.text" @keydown.enter="addTaskOnEnter"
+                    type="text">
                 <button @click="addTask">aggiungi</button>
             </div>
 
             <ul>
-                <li @click="done(index)" v-for="(task,index) in tasks"
-                    ="{{index}}">{{task.text}}
-                    <i
-                        @click.stop="removeTask(index)"> x</i></li>
+                <li v-for="(task, index) in tasks" :key="index"
+                    @click="done(index)">
+                    <span :class="{ 'task-done': task.done }">{{task.text}}
+                    </span>
+                    <i @click.stop="removeTask(index)"
+                        class="fa-regular fa-circle-xmark"> </i>
+                </li>
 
             </ul>
             <p v-if="tasks.length == 0">Non ci sono tasks</p>
