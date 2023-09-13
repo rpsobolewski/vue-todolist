@@ -7,7 +7,24 @@
         <link rel="stylesheet" href="./assets/css/style.css">
     </head>
     <body>
+        <div id="app">
+            <div class="newTask">
+                <input v-model="newTask.text" type="text">
+                <button @click="addTask">aggiungi</button>
+            </div>
 
+            <ul>
+                <li @click="done(index)" v-for="(task,index) in tasks"
+                    ="{{index}}">{{task.text}}
+                    <i
+                        @click.stop="removeTask(index)"> x</i></li>
+
+            </ul>
+            <p v-if="tasks.length == 0">Non ci sono tasks</p>
+
+        </div>
+
+        <script src='https://unpkg.com/vue@3/dist/vue.global.js'></script>
         <script type="text/javascript" src="./assets/js/main.js"></script>
     </body>
 </html>
